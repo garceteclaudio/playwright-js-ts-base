@@ -19,7 +19,7 @@ export default defineConfig({
   workers: 4,
 
   reporter: [['html', { 
-    outputFolder: `${timestamp}-playwright-report`,
+    outputFolder: `reports/${timestamp}-playwright-report`,
     open: 'never' 
   }]],
   use: {

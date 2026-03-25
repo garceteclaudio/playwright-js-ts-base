@@ -3,4 +3,7 @@ services:
     build: .
     container_name: playwright_tests
     working_dir: /app
-    command: npx playwright test --reporter=html
+    volumes:
+      - .:/app
+      - /app/node_modules 
+    command: npx playwright test

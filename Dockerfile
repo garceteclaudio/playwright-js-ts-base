@@ -17,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Crear carpeta de reportes
-RUN mkdir -p /app/playwright-report
+RUN mkdir -p /app/reports
 
 # Ejecutar tests
 CMD ["npx", "playwright", "test", "--reporter=html"]

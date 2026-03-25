@@ -1,5 +1,5 @@
 # Imagen oficial Playwright (incluye Node + browsers)
-FROM mcr.microsoft.com/playwright:v1.42.0-jammy
+FROM mcr.microsoft.com/playwright:v1.55.0-jammy
 
 # Timezone Argentina
 ENV TZ=America/Argentina/Buenos_Aires

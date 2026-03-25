@@ -1,5 +1,5 @@
 # Imagen base
-FROM node:20-bullseye
+FROM node:22-bullseye
 
 # Evita prompts interactivos + timezone Argentina
 ENV DEBIAN_FRONTEND=noninteractive

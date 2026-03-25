@@ -1,5 +1,5 @@
 # Imagen oficial Playwright
-FROM mcr.microsoft.com/playwright:v1.55.0-jammy
+FROM mcr.microsoft.com/playwright:v1.58.2-jammy
 
 ENV TZ=America/Argentina/Buenos_Aires
 

@@ -1,9 +1,10 @@
 services:
   playwright:
     build: .
-    container_name: playwright_tests
-    volumes:
-      - .:/app
-      - /app/node_modules
+    container_name: playwright_tests_container
     working_dir: /app
+    #Persistir reports en el host en CI cloud (GitHub Actions, GitLab) mejor usar artifacts
+    volumes:
+      - ./reports:/app/reports
+      - ./test-results:/app/test-results
     command: npx playwright test

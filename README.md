@@ -61,6 +61,56 @@ npx playwright test --debug
 npx playwright test tests/login-DI-1.spec.ts
 ```
 
+## Running Tests with Docker
+
+### Using Docker Compose (Recommended)
+
+To run tests in a containerized environment using Docker Compose:
+
+```bash
+docker-compose up
+```
+
+This will:
+- Build the Docker image from the Dockerfile
+- Run all tests inside a container
+- Mount local `reports/` and `test-results/` directories for result persistence
+- Automatically clean up the container after execution
+
+To rebuild the image and run tests:
+```bash
+docker-compose up --build
+```
+
+To run tests without stopping the container:
+```bash
+docker-compose run playwright npx playwright test
+```
+
+### Using Docker directly
+
+Build the Docker image:
+```bash
+docker build -t playwright-tests .
+```
+
+Run all tests:
+```bash
+docker run --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests
+```
+
+Run tests in a specific browser:
+```bash
+docker run --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests npx playwright test --project=chromium
+```
+
+Run tests in interactive mode:
+```bash
+docker run -it --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests npx playwright test --ui
+```
+
+**Note:** On macOS/Linux, replace `%cd%` with `$(pwd)` in the docker run commands.
+
 ## Code Generation
 
 To auto-generate tests using Playwright's codegen tool:

@@ -1,23 +1,21 @@
-# Imagen oficial Playwright (incluye Node + browsers)
+# Imagen oficial Playwright
 FROM mcr.microsoft.com/playwright:v1.55.0-jammy
 
-# Timezone Argentina
 ENV TZ=America/Argentina/Buenos_Aires
 
-# Set working directory
 WORKDIR /app
 
-# Copiar dependencias primero (mejor cache)
+# Copiar solo dependencias primero (cache eficiente)
 COPY package*.json ./
 
-# Instalar dependencias del proyecto
-RUN npm install
+# Instalar deps limpias (mejor para CI)
+RUN npm ci
 
-# Copiar código
+# Copiar el resto del código
 COPY . .
 
 # Crear carpeta de reportes
 RUN mkdir -p /app/reports
 
 # Ejecutar tests
-CMD ["npx", "playwright", "test", "--reporter=html"]
+CMD ["npx", "playwright", "test"]

@@ -1,11 +1,12 @@
 # Playwright JS/TS Base Project
 
-This is a base project for end-to-end testing using Playwright with JavaScript/TypeScript. It includes page objects, locators, fixtures, and example test files.
+A foundational project template for end-to-end testing with Playwright using JavaScript and TypeScript. This setup includes the Page Object Model pattern, test fixtures, Docker support, and example test cases to get you started quickly.
 
 ## Prerequisites
 
 - Node.js (version 16 or higher)
 - npm or yarn
+- Docker (optional, for containerized execution)
 
 ## Installation
 
@@ -27,16 +28,17 @@ This is a base project for end-to-end testing using Playwright with JavaScript/T
 
 ## Project Structure
 
-- `tests/` - Test files (.spec.ts, .js)
-- `pages/` - Page Object Model classes
-- `locators/` - JSON files with element selectors
-- `fixtures/` - Test fixtures and shared setup
-- `playwright.config.ts` - Playwright configuration
+- `tests/` - Test files (.spec.ts, .js) containing the actual test cases
+- `pages/` - Page Object Model classes that encapsulate page-specific logic and locators
+- `fixtures/` - Test fixtures and shared setup, including `pageObjects.ts` which initializes the page objects (LoginPage and InventoryPage) used across all tests
+- `playwright.config.ts` - Playwright configuration file
 - `package.json` - Project dependencies and scripts
+- `docker-compose.yml` - Docker Compose configuration for running tests in a container
+- `Dockerfile` - Docker image definition
 
 ## Running Tests
 
-### Run all tests
+### Run all tests locally
 ```bash
 npx playwright test
 ```
@@ -61,62 +63,19 @@ npx playwright test --debug
 npx playwright test tests/login-DI-1.spec.ts
 ```
 
-## Running Tests with Docker
+## Docker
 
-### Using Docker Compose (Recommended)
-
-To run tests in a containerized environment using Docker Compose:
-
+### Run tests in Docker container
 ```bash
 docker-compose up
 ```
 
-This will:
-- Build the Docker image from the Dockerfile
-- Run all tests inside a container
-- Mount local `reports/` and `test-results/` directories for result persistence
-- Automatically clean up the container after execution
-
-To rebuild the image and run tests:
+### Clean up Docker images and containers
+To remove all containers, networks, and images created by Docker Compose:
 ```bash
-docker-compose up --build
+docker-compose down --rmi all
 ```
 
-To run tests without stopping the container:
-```bash
-docker-compose run playwright npx playwright test
-```
-
-### Using Docker directly
-
-Build the Docker image:
-```bash
-docker build -t playwright-tests .
-```
-
-Run all tests:
-```bash
-docker run --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests
-```
-
-Run tests in a specific browser:
-```bash
-docker run --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests npx playwright test --project=chromium
-```
-
-Run tests in interactive mode:
-```bash
-docker run -it --rm -v %cd%/reports:/app/reports -v %cd%/test-results:/app/test-results playwright-tests npx playwright test --ui
-```
-
-**Note:** On macOS/Linux, replace `%cd%` with `$(pwd)` in the docker run commands.
-
-## Code Generation
-
-To auto-generate tests using Playwright's codegen tool:
-```bash
-npx playwright codegen
-```
 
 ## Reports
 
@@ -132,9 +91,8 @@ The project uses `playwright.config.ts` for configuration. You can modify browse
 ## Contributing
 
 1. Follow the Page Object Model pattern for new pages
-2. Store locators in JSON files under `locators/`
-3. Use fixtures for shared test setup
-4. Write descriptive test names and comments
+2. Use fixtures for shared test setup
+3. Write descriptive test names and comments
 
 ## Documentation
 

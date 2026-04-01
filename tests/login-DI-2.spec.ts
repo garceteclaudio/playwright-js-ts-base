@@ -1,4 +1,4 @@
-import { test } from '../fixtures/pageObjects';
+import { test } from '../utils/pageObjects';
 
 test('Login 4to saucedemo con fixtures', async ({ loginPage, inventoryPage }) => {
   await loginPage.goto();

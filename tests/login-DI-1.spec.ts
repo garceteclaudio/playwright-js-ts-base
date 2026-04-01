@@ -1,4 +1,4 @@
-import { test } from '../fixtures/pageObjects';
+import { test } from '../utils/pageObjects';
 
 
 
